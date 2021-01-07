@@ -6,15 +6,15 @@ services:
     container_name: web
     image: ${WEBUI_IMAGE}
     expose:
-      - 8888
+      - 8080
     networks:
       - traefik
     environment:
-      - WEB_PROXY=http://aria2:6800
-      - WS_PROXY=ws://aria2:6800
+      - WEB_PROXY=http://aria2:8080
+      - WS_PROXY=ws://aria2:8080
     labels:
       - "traefik.enable=true"
-      - "traefik.port=8888"
+      - "traefik.port=8080"
       - "traefik.frontend.rule=Host:${BIND_HOSTS}"
       - "traefik.frontend.entryPoints=http,https,ws,wss"
 
@@ -24,7 +24,7 @@ services:
     volumes:
       - ./downloads:/downloads
     expose:
-      - 6800
+      - 8080
     networks:
       - traefik
     labels:
